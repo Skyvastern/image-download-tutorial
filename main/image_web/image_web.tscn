@@ -1,15 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://b1hpetgn0gssx"]
+[gd_scene load_steps=4 format=3 uid="uid://b1hpetgn0gssx"]
 
 [ext_resource type="Script" path="res://main/image_web/image_web.gd" id="1_ug2qc"]
 [ext_resource type="PackedScene" uid="uid://cixysanw10nsx" path="res://main/image_web/image_download_api/image_download_api.tscn" id="2_qsv0j"]
+[ext_resource type="PackedScene" uid="uid://d1ln63nghpb33" path="res://main/image_web/image_status/image_status.tscn" id="3_85bi5"]
 
-[node name="Image Web" type="ColorRect" node_paths=PackedStringArray("image_tr", "image_download_api")]
+[node name="Image Web" type="ColorRect" node_paths=PackedStringArray("image_tr", "image_status", "image_download_api")]
 offset_right = 640.0
 offset_bottom = 675.0
 size_flags_vertical = 3
 color = Color(0.0962047, 0.0962048, 0.0962047, 1)
 script = ExtResource("1_ug2qc")
 image_tr = NodePath("Image TR")
+image_status = NodePath("Image Status")
 image_download_api = NodePath("Image Download API")
 
 [node name="Image TR" type="TextureRect" parent="."]
@@ -25,5 +27,19 @@ grow_horizontal = 2
 grow_vertical = 2
 expand_mode = 1
 stretch_mode = 5
+
+[node name="Image Status" parent="." instance=ExtResource("3_85bi5")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -94.5
+offset_top = -17.0
+offset_right = 94.5
+offset_bottom = 17.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Image Download API" parent="." instance=ExtResource("2_qsv0j")]

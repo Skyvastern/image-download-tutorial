@@ -2,6 +2,7 @@ extends ColorRect
 class_name ImageWeb
 
 @export var image_tr: TextureRect
+@export var image_status: ImageStatus
 @export var image_download_api: ImageDownloadAPI
 
 
@@ -14,9 +15,11 @@ func _ready() -> void:
 func _reset_state() -> void:
 	image_tr.texture = null
 	image_tr.visible = false
+	image_status.hide_status()
 
 
 func download_image(url: String) -> void:
+	image_status.show_status("Downloading image...")
 	image_download_api.download(url)
 
 
@@ -29,7 +32,7 @@ func _on_image_download_api_processed(
 ) -> void:
 	
 	if result != HTTPRequest.RESULT_SUCCESS or response_code != 200:
-		push_warning("Image couldn't be downloaded.")
+		image_status.show_error("Image couldn't be downloaded.")
 		return
 	
 	var image: Image = Image.new()
@@ -61,8 +64,9 @@ func _on_image_download_api_processed(
 			error = FAILED
 	
 	if error != OK:
-		push_warning("Image cannot be loaded.")
+		image_status.show_error("Image cannot be loaded.")
 		return
 	
+	image_status.hide_status()
 	image_tr.texture = ImageTexture.create_from_image(image)
 	image_tr.visible = true
