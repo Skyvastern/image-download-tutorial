@@ -22,7 +22,9 @@ func _ready() -> void:
 
 
 func _on_generate_btn_pressed() -> void:
+	image_web.reset_state()
 	image_web.image_status.show_status("Generating image...")
+	
 	prompt_input.editable = false
 	generate_btn.disabled = true
 	
