@@ -1,3 +1,28 @@
-[gd_scene format=3 uid="uid://evj1ahoh20cj"]
+[gd_scene load_steps=3 format=3 uid="uid://evj1ahoh20cj"]
 
-[node name="Main" type="Node"]
+[ext_resource type="Script" path="res://main/main.gd" id="1_24g1w"]
+[ext_resource type="PackedScene" uid="uid://b1hpetgn0gssx" path="res://main/image_web/image_web.tscn" id="2_1snmc"]
+
+[node name="Main" type="Control" node_paths=PackedStringArray("image_web")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_24g1w")
+image_web = NodePath("Image Web")
+
+[node name="Image Web" parent="." instance=ExtResource("2_1snmc")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -320.0
+offset_top = -337.5
+offset_right = 320.0
+offset_bottom = 337.5
+grow_horizontal = 2
+grow_vertical = 2

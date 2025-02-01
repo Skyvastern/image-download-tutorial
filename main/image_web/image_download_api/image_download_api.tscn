@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cixysanw10nsx"]
+
+[ext_resource type="Script" path="res://main/image_web/image_download_api/image_download_api.gd" id="1_x304p"]
+
+[node name="Image Download API" type="HTTPRequest"]
+timeout = 15.0
+script = ExtResource("1_x304p")
