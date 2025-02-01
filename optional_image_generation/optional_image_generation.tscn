@@ -1,0 +1,49 @@
+[gd_scene load_steps=4 format=3 uid="uid://hi1req3rc35p"]
+
+[ext_resource type="Script" path="res://optional_image_generation/optional_image_generation.gd" id="1_hkm1s"]
+[ext_resource type="PackedScene" uid="uid://b1hpetgn0gssx" path="res://main/image_web/image_web.tscn" id="1_naeet"]
+[ext_resource type="PackedScene" uid="uid://drwc5tulb85ja" path="res://optional_image_generation/image_generate_api/image_generate_api.tscn" id="3_1m7yk"]
+
+[node name="Optional - Image Generation" type="Control" node_paths=PackedStringArray("image_web", "prompt_input", "generate_btn", "image_generate_api")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hkm1s")
+image_web = NodePath("Items/Image Web")
+prompt_input = NodePath("Items/Prompt")
+generate_btn = NodePath("Items/Generate")
+image_generate_api = NodePath("Image Generate API")
+
+[node name="Items" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -312.0
+offset_top = -312.0
+offset_right = 312.0
+offset_bottom = 312.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="Image Web" parent="Items" instance=ExtResource("1_naeet")]
+custom_minimum_size = Vector2(624, 624)
+layout_mode = 2
+
+[node name="Prompt" type="LineEdit" parent="Items"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+
+[node name="Generate" type="Button" parent="Items"]
+layout_mode = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 64
+text = "Generate"
+
+[node name="Image Generate API" parent="." instance=ExtResource("3_1m7yk")]
