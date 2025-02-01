@@ -3,7 +3,14 @@ class_name ImageDownloadAPI
 
 signal processed
 
-var current_file_type: String
+var image_load_method: String
+var valid_types: Dictionary = {
+	"image/png": "load_png_from_buffer",
+	"image/jpeg": "load_jpg_from_buffer",
+	"image/svg+xml": "load_svg_from_buffer",
+	"image/webp": "load_webp_from_buffer",
+	"image/bmp": "load_bmp_from_buffer"
+}
 
 
 func _ready() -> void:
@@ -11,9 +18,19 @@ func _ready() -> void:
 
 
 func download(url: String) -> void:
-	current_file_type = url.split(".")[-1]
 	request(url)
 
 
-func _on_request_completed(result: int, response_code: int, _headers: PackedStringArray, body: PackedByteArray) -> void:
-	processed.emit(result, response_code, body, current_file_type)
+func _on_request_completed(result: int, response_code: int, headers: PackedStringArray, body: PackedByteArray) -> void:
+	# Get image type and its respective GDScript method
+	var content_type: String = ""
+	
+	for val in headers:
+		if val.begins_with("Content-Type: "):
+			content_type = val.split("Content-Type: ")[1]
+			break
+	
+	image_load_method = valid_types.get(content_type, "")
+	
+	# Emit signal with all details
+	processed.emit(result, response_code, body, image_load_method)

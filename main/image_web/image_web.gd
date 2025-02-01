@@ -27,7 +27,7 @@ func _on_image_download_api_processed(
 	result: int,
 	response_code: int,
 	body: PackedByteArray,
-	current_file_type: String
+	image_load_method: String
 	
 ) -> void:
 	
@@ -38,30 +38,8 @@ func _on_image_download_api_processed(
 	var image: Image = Image.new()
 	var error: Error = FAILED
 	
-	match current_file_type:
-		"png":
-			error = image.load_png_from_buffer(body)
-		
-		"jpg":
-			error = image.load_jpg_from_buffer(body)
-		
-		"svg":
-			error = image.load_svg_from_buffer(body)
-		
-		"webp":
-			error = image.load_webp_from_buffer(body)
-		
-		"bmp":
-			error = image.load_bmp_from_buffer(body)
-		
-		"tga":
-			error = image.load_tga_from_buffer(body)
-		
-		"ktx":
-			error = image.load_ktx_from_buffer(body)
-		
-		_:
-			error = FAILED
+	if image_load_method != "":
+		error = image.call(image_load_method, body)
 	
 	if error != OK:
 		image_status.show_error("Image cannot be loaded.")
