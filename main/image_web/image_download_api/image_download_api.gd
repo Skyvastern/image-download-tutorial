@@ -2,6 +2,7 @@ extends HTTPRequest
 class_name ImageDownloadAPI
 
 signal processed
+signal request_failed
 
 var image_load_method: String
 var valid_types: Dictionary = {
@@ -18,7 +19,10 @@ func _ready() -> void:
 
 
 func download(url: String) -> void:
-	request(url)
+	var error: Error = request(url)
+	
+	if error != OK:
+		request_failed.emit()
 
 
 func _on_request_completed(result: int, response_code: int, headers: PackedStringArray, body: PackedByteArray) -> void:

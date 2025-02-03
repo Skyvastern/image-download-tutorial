@@ -8,6 +8,7 @@ class_name ImageWeb
 
 func _ready() -> void:
 	image_download_api.processed.connect(_on_image_download_api_processed)
+	image_download_api.request_failed.connect(_on_image_download_api_request_failed)
 	
 	reset_ui()
 
@@ -48,3 +49,9 @@ func _on_image_download_api_processed(
 	image_status.hide_status()
 	image_tr.texture = ImageTexture.create_from_image(image)
 	image_tr.visible = true
+
+
+func _on_image_download_api_request_failed() -> void:
+	image_tr.texture = null
+	image_tr.visible = false
+	image_status.show_error("Unable to make request.")
