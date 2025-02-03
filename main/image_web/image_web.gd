@@ -9,10 +9,10 @@ class_name ImageWeb
 func _ready() -> void:
 	image_download_api.processed.connect(_on_image_download_api_processed)
 	
-	reset_state()
+	reset_ui()
 
 
-func reset_state() -> void:
+func reset_ui() -> void:
 	image_tr.texture = null
 	image_tr.visible = false
 	image_status.hide_status()
