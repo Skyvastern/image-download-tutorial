@@ -1,6 +1,6 @@
 # In some places I have written code in not so great way
 # 1. Directly using methods of image_web.image_status doesn't feel right
-# 2. Awaiting image_web.image_download_api.processed doesn't feel right too
+# 2. Awaiting image_web.image_download_api.res_received doesn't feel right too
 #
 # But for the scope of this demonstration of image download, I think its completely fine
 
@@ -18,11 +18,11 @@ class_name OptionalImageGeneration
 
 func _ready() -> void:
 	generate_btn.pressed.connect(_on_generate_btn_pressed)
-	image_generate_api.processed.connect(_on_image_generated)
+	image_generate_api.res_received.connect(_on_image_generated)
 
 
 func _on_generate_btn_pressed() -> void:
-	image_web.reset_state()
+	image_web.reset_ui()
 	image_web.image_status.show_status("Generating image...")
 	
 	prompt_input.editable = false
@@ -42,8 +42,9 @@ func _on_image_generated(result: int, response_code: int, json: Dictionary) -> v
 		image_web.image_status.hide_status()
 		
 		var image_url: String = json["data"][0]["url"]
-		image_web.download_image(image_url)
+		image_web.url = image_url
+		image_web.download_image()
 		
-		await image_web.image_download_api.processed
+		await image_web.image_download_api.res_received
 		prompt_input.editable = true
 		generate_btn.disabled = false

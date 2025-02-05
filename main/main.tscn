@@ -24,3 +24,4 @@ offset_bottom = 337.5
 grow_horizontal = 2
 grow_vertical = 2
 url = "https://godotengine.org/assets/press/logo_vertical_color_light.png"
+autoload_image = true

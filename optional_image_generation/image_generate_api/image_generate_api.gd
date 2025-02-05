@@ -1,7 +1,7 @@
 extends HTTPRequest
 class_name ImageGenerateAPI
 
-signal processed
+signal res_received
 var url: String = "https://api.openai.com/v1/images/generations"
 
 
@@ -31,4 +31,4 @@ func _on_request_completed(result: int, response_code: int, _headers: PackedStri
 	if result == 0:
 		json = JSON.parse_string(body.get_string_from_utf8())
 	
-	processed.emit(result, response_code, json)
+	res_received.emit(result, response_code, json)

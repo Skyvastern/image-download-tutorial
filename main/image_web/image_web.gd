@@ -3,6 +3,7 @@ class_name ImageWeb
 
 @export_group("Main")
 @export var url: String
+@export var autoload_image: bool = false
 
 @export_group("References")
 @export var image_tr: TextureRect
@@ -15,7 +16,9 @@ func _ready() -> void:
 	image_download_api.req_failed.connect(_on_image_download_api_req_failed)
 	
 	reset_ui()
-	download_image()
+	
+	if autoload_image:
+		download_image()
 
 
 func reset_ui() -> void:
