@@ -1,6 +1,10 @@
 extends ColorRect
 class_name ImageWeb
 
+@export_group("Main")
+@export var url: String
+
+@export_group("References")
 @export var image_tr: TextureRect
 @export var image_status: ImageStatus
 @export var image_download_api: ImageDownloadAPI
@@ -11,6 +15,7 @@ func _ready() -> void:
 	image_download_api.req_failed.connect(_on_image_download_api_req_failed)
 	
 	reset_ui()
+	download_image()
 
 
 func reset_ui() -> void:
@@ -19,7 +24,7 @@ func reset_ui() -> void:
 	image_status.hide_status()
 
 
-func download_image(url: String) -> void:
+func download_image() -> void:
 	image_status.show_status("Downloading image...")
 	image_download_api.download(url)
 

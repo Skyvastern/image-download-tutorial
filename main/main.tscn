@@ -1,17 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://evj1ahoh20cj"]
+[gd_scene load_steps=2 format=3 uid="uid://evj1ahoh20cj"]
 
-[ext_resource type="Script" path="res://main/main.gd" id="1_24g1w"]
 [ext_resource type="PackedScene" uid="uid://b1hpetgn0gssx" path="res://main/image_web/image_web.tscn" id="2_1snmc"]
 
-[node name="Main" type="Control" node_paths=PackedStringArray("image_web")]
+[node name="Main" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_24g1w")
-image_web = NodePath("Image Web")
 
 [node name="Image Web" parent="." instance=ExtResource("2_1snmc")]
 layout_mode = 1
@@ -26,3 +23,4 @@ offset_right = 320.0
 offset_bottom = 337.5
 grow_horizontal = 2
 grow_vertical = 2
+url = "https://godotengine.org/assets/press/logo_vertical_color_light.png"
