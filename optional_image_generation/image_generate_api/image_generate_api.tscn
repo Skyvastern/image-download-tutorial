@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://drwc5tulb85ja"]
-
-[ext_resource type="Script" path="res://optional_image_generation/image_generate_api/image_generate_api.gd" id="1_hf4vo"]
-
-[node name="Image Generate API" type="HTTPRequest"]
-timeout = 30.0
-script = ExtResource("1_hf4vo")
